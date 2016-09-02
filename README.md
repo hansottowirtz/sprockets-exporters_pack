@@ -2,7 +2,9 @@
 
 This gem aims to add some exporters to sprockets, which are currently [under review][PR].
 
-Currently, there is a Brotli exporter, which should be used with [Rails][rails/rails] and [ngx_brotli][google/ngx_brotli].
+Currently, it has:
+- a Zopfli exporter, which has a better compression ratio than the original Zlib.
+- a Brotli exporter, which should be used with [ngx_brotli][google/ngx_brotli].
 
 ## Installation
 
@@ -34,11 +36,16 @@ env = Sprockets::Environment.new
 env.register_exporter %w(text/css application/javascript image/svg+xml), Sprockets::Exporters::BrotliExporter
 ```
 
+Note: to use `Sprockets::Exporters::ZopfliExporter`, you must unregister `GzipExporter`, like this:
+
+```ruby
+env.unregister_exporter GzipExporter
+env.register_exporter '...', Sprockets::Exporters::ZopfliExporter
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 

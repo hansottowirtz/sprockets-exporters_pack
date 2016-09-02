@@ -17,6 +17,7 @@ module Sprockets
 
           PathUtils.atomic_write(target) do |file|
             file.write(brotli)
+            file.close
           end
         end
       end

@@ -23,4 +23,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake', '~> 10.0'
 
   spec.add_dependency 'brotli', '~> 0.1.2'
+  spec.add_dependency 'zopfli', '~> 0.0.4'
 end
