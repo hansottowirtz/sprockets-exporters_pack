@@ -14,7 +14,10 @@ module Sprockets
             :generic
           end
           brotli = Brotli.deflate(data, mode: mode, quality: self.class.quality)
-          File.open(target, 'wb') { |file| file.write(brotli) }
+
+          PathUtils.atomic_write(target) do |file|
+            file.write(brotli)
+          end
         end
       end
 
