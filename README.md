@@ -10,7 +10,7 @@ Currently, it has:
 Add this line to your `Gemfile`:
 
 ```ruby
-gem 'sprockets-exporters-pack'
+gem 'sprockets-exporters_pack'
 ```
 
 ```bash
@@ -33,10 +33,6 @@ Without Rails:
 env = Sprockets::Environment.new
 env.register_exporter %w(text/css application/javascript image/svg+xml), Sprockets::ExportersPack::BrotliExporter
 ```
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 ## Contributing
 
