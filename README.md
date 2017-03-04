@@ -1,9 +1,8 @@
-# Sprockets::Exporters
+# Sprockets::ExportersPack
 
-This gem aims to add some exporters to sprockets, which are currently [under review][PR].
+This gem aims to add some exporters to [sprockets][rails/sprockets], which are currently [under review][PR].
 
 Currently, it has:
-- a Zopfli exporter, which has a better compression ratio than the original Zlib.
 - a Brotli exporter, which should be used with [ngx_brotli][google/ngx_brotli].
 
 ## Installation
@@ -11,8 +10,7 @@ Currently, it has:
 Add this line to your `Gemfile`:
 
 ```ruby
-gem 'sprockets', github: 'hansottowirtz/sprockets', branch: 'exporting'
-gem 'sprockets-exporters'
+gem 'sprockets-exporters-pack'
 ```
 
 ```bash
@@ -25,7 +23,7 @@ With Rails, in `application.rb`:
 
 ```ruby
 config.assets.configure do |env|
-  env.register_exporter %w(text/css application/javascript image/svg+xml), Sprockets::Exporters::BrotliExporter
+  env.register_exporter %w(text/css application/javascript image/svg+xml), Sprockets::ExportersPack::BrotliExporter
 end
 ```
 
@@ -33,14 +31,7 @@ Without Rails:
 
 ```ruby
 env = Sprockets::Environment.new
-env.register_exporter %w(text/css application/javascript image/svg+xml), Sprockets::Exporters::BrotliExporter
-```
-
-Note: to use `Sprockets::Exporters::ZopfliExporter`, you must unregister `GzipExporter`, like this:
-
-```ruby
-env.unregister_exporter GzipExporter
-env.register_exporter '...', Sprockets::Exporters::ZopfliExporter
+env.register_exporter %w(text/css application/javascript image/svg+xml), Sprockets::ExportersPack::BrotliExporter
 ```
 
 ## Development
@@ -49,12 +40,13 @@ After checking out the repo, run `bin/setup` to install dependencies. You can al
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/hansottowirtz/sprockets-exporters. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Yes please! Open an issue with exporters you want to see added.
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
-[PR]: https://github.com/rails/sprockets/pull/372
+[PR]: https://github.com/rails/sprockets/pull/386
+[rails/sprockets]: https://github.com/rails/sprockets
 [rails/rails]: https://github.com/rails/rails
 [google/ngx_brotli]: https://github.com/google/ngx_brotli
