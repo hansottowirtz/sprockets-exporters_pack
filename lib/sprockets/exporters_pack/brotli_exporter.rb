@@ -20,9 +20,9 @@ module Sprockets
 
       def call
         data = File.binread(target)
-        mode = if asset.content_type.match /font|otf/
+        mode = if asset.content_type.match self.class.font_regex
           :font
-        elsif asset.content_type.match /text|(application\/(javascript|json|xml))/
+        elsif asset.content_type.match self.class.text_regex
           :text
         else
           :generic
@@ -37,9 +37,19 @@ module Sprockets
 
       class << self
         attr_writer :quality
+        attr_writer :font_regex
+        attr_writer :text_regex
 
         def quality
           @quality || 9
+        end
+
+        def font_regex
+          @font_regex || /font|otf/
+        end
+
+        def text_regex
+          @text_regex || /text|(application\/(javascript|json|xml))/
         end
       end
     end
